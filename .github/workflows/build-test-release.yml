@@ -66,7 +66,7 @@ jobs:
       - name: Create GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
-          TAG_NAME: release-${{ github.run_number }}
+          TAG_NAME: v${{ github.run_number }}
         run: |
           chmod +x noughts-crosses
           git tag "$TAG_NAME" "$GITHUB_SHA"

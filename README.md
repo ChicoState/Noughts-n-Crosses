@@ -1,5 +1,7 @@
 # Noughts and Crosses
 
+[![Build, Test, and Release](https://github.com/ChicoState/Noughts-n-Crosses/actions/workflows/build-test-release.yml/badge.svg)](https://github.com/ChicoState/Noughts-n-Crosses/actions/workflows/build-test-release.yml)
+
 A simple command-line Noughts and Crosses game written in C++. The player uses
 `X`, the computer uses `O`, and the program detects wins, draws, invalid moves,
 and basic computer strategy.
