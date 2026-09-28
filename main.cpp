@@ -56,7 +56,7 @@ int main()
             cout << "It's a draw!\n";
         }
         cout << "Play again (y/n)?" << endl;
-        string reponse = "";
+        string response = "";
         cin >> response;
         if(response == "Y" || response == "y"){
             continue;
