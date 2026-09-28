@@ -40,7 +40,13 @@ int main()
         makeMove(board, readHumanMove(board), HumanMarker);
 
         if (isGameOver(board)) {
-            break;
+	    int check;
+            cout << "Do you want to play again? 1 for yes.\n";
+	    cin >> check;
+	    if (check != 1)
+	    {
+	    	break;	
+	    }
         }
 
         const int computerMove = chooseComputerMove(board);
