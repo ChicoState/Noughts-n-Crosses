@@ -185,4 +185,6 @@ int readHumanMove(const Board& board)
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
+
+
 }
