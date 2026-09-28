@@ -26,6 +26,7 @@ int chooseComputerMove(const Board& board);
 char displayCell(const Board& board, int index);
 void printBoard(const Board& board);
 int readHumanMove(const Board& board);
+char readNewGameChoice();
 
 #ifndef NOUGHTS_AND_CROSSES_TEST
 int main()
@@ -57,6 +58,11 @@ int main()
         cout << "Computer wins!\n";
     } else {
         cout << "It's a draw!\n";
+    }
+
+    const char playAgain = readNewGameChoice();
+    if (playAgain == 'y' || playAgain == 'Y') {
+        return main();
     }
 
     return 0;
@@ -188,6 +194,22 @@ int readHumanMove(const Board& board)
         }
 
         cout << "That move is not available. Try again.\n";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+}
+
+char readNewGameChoice()
+{
+    char choice = 0;
+
+    while (true) {
+        cout << "Play again (y/n)? ";
+        if (cin >> choice && (choice == 'y' || choice == 'Y' || choice == 'n' || choice == 'N')) {
+            return std::tolower(choice);
+        }
+
+        cout << "Invalid choice. Try again.\n";
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
