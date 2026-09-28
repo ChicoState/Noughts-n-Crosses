@@ -24,6 +24,8 @@ int readHumanMove(const Board& board);
 #ifndef NOUGHTS_AND_CROSSES_TEST
 int main()
 {
+    bool playAgain = false;
+    while (playAgain || !playAgain) {
     Board board = createBoard();
 
     std::cout << "Noughts and Crosses\n";
@@ -53,6 +55,15 @@ int main()
         std::cout << "It's a draw!\n";
     }
 
+    // Ask player if they want to play again
+    std::cout << "Do you want to play again? (y/n): ";
+    char choice;
+    std::cin >> choice;
+    if (choice == 'y' || choice == 'Y') {
+        playAgain = true;
+    }
+
+    }
     return 0;
 }
 #endif
