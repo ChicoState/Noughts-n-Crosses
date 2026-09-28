@@ -26,39 +26,52 @@ int chooseComputerMove(const Board& board);
 char displayCell(const Board& board, int index);
 void printBoard(const Board& board);
 int readHumanMove(const Board& board);
-
+//for output message to skip the first line on replay
+bool first_time = true;
 #ifndef NOUGHTS_AND_CROSSES_TEST
-int main()
-{
-    Board board = createBoard();
 
-    cout << "Noughts and Crosses\n";
-    cout << "You are X. The computer is O.\n";
-
-    while (!isGameOver(board)) {
-        printBoard(board);
-        makeMove(board, readHumanMove(board), HumanMarker);
-
-        if (isGameOver(board)) {
-            break;
+int main() {
+    char response = 'y'; 
+    while (response == 'y' || response == 'Y') {
+        Board board = createBoard();
+        if (first_time == true) {
+            std::cout << "Noughts and Crosses\n";
         }
+            std::cout << "You are X. The computer is O.\n";
 
-        const int computerMove = chooseComputerMove(board);
-        makeMove(board, computerMove, ComputerMarker);
-        cout << "Computer chose square " << computerMove << ".\n";
+            while (!isGameOver(board)) {
+                printBoard(board);
+                makeMove(board, readHumanMove(board), HumanMarker);
+
+                if (isGameOver(board)) {
+                    break;
+                }
+
+                const int computerMove = chooseComputerMove(board);
+                makeMove(board, computerMove, ComputerMarker);
+                std::cout << "Computer chose square " << computerMove << ".\n";
+            }
+
+            printBoard(board);
+
+            const char result = winner(board);
+            if (result == HumanMarker) {
+                std::cout << "You win!\n";
+            } else if (result == ComputerMarker) {
+                std::cout << "Computer wins!\n";
+            } else {
+                std::cout << "It's a draw!\n";
+            }
+   
+            std::cout << "Play again (y/n)?\n";
+            std::cin >> response ;
+            if (response == 'y' || response == 'Y') {
+                first_time == false;	
+            } else {
+                first_time == true;
+            }
     }
-
-    printBoard(board);
-
-    const char result = winner(board);
-    if (result == HumanMarker) {
-        cout << "You win!\n";
-    } else if (result == ComputerMarker) {
-        cout << "Computer wins!\n";
-    } else {
-        cout << "It's a draw!\n";
-    }
-
+    std::cout <<"Good game.\n";
     return 0;
 }
 #endif
