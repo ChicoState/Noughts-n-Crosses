@@ -53,7 +53,21 @@ int main()
     } else {
       std::cout << "It's a draw!\n";
     }
-    std::cout << "Play again (y/n)?";
+    std::cout << "Play again (y/n)?\n";
+    char cont = ' ';
+    while (true) {
+      std::cin >> cont;
+      if (cont == 'y' || cont == 'Y' || cont == 'n' || cont == 'N') {
+        break;
+      }
+      std::cout << "Play again (y/n)?\n";
+    }
+    if (cont == 'y' || cont == 'Y') {
+      continue;
+    }
+    else {
+      break;
+    }
   }
 
   return 0;
