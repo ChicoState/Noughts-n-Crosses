@@ -56,11 +56,14 @@ int main()
     }
 
     // Ask player if they want to play again
-    std::cout << "Do you want to play again? (y/n): ";
+    std::cout << "Play again? (y/n): ";
     char choice;
     std::cin >> choice;
     if (choice == 'y' || choice == 'Y') {
         playAgain = true;
+    } else if (choice == 'n' || choice == 'N') {
+        std::cout << "Good game.\n";
+        exit(0);
     }
 
     }
