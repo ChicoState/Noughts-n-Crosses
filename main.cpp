@@ -53,6 +53,16 @@ int main()
         std::cout << "It's a draw!\n";
     }
 
+    std::cout << "Play again (y/n)?\n";
+    char restart;
+    std::cin >> restart;
+    if (std::toupper(restart) == std::toupper('Y')) {
+    	main();
+    }
+    else {
+	std::cout << "Good game.\n";
+    }
+
     return 0;
 }
 #endif
