@@ -25,6 +25,7 @@ int readHumanMove(const Board& board);
 int main()
 {
     Board board = createBoard();
+    char again = 'y';
 
     std::cout << "Noughts and Crosses\n";
     std::cout << "You are X. The computer is O.\n";
@@ -53,7 +54,15 @@ int main()
         std::cout << "It's a draw!\n";
     }
 
-    return 0;
+
+    std::cout << "Play again (y/n)?\n";
+    if(std::cin >> again){
+    	main();
+    }
+    else{
+	std::cout << "Good game.\n";
+	return 0;
+    }
 }
 #endif
 
