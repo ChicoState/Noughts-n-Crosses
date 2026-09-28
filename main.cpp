@@ -3,11 +3,17 @@
 #include <iostream>
 #include <limits>
 
+using std::array;
+using std::cin;
+using std::cout;
+using std::numeric_limits;
+using std::streamsize;
+
 const char EmptyCell = ' ';
 const char HumanMarker = 'X';
 const char ComputerMarker = 'O';
 
-using Board = std::array<char, 9>;
+using Board = array<char, 9>;
 
 Board createBoard();
 bool isMoveValid(const Board& board, int position);
@@ -29,11 +35,11 @@ int main()
     while (1==1){
 	Board board = createBoard();
 	playGame(board);
-	std::cout << "Play again (y/n)?";
+	cout << "Play again (y/n)?";
 	char userIn;
-	std::cin >> userIn;
+	cin >> userIn;
 	if(userIn != 'y' && userIn != 'Y'){
-	    std::cout << "Good game.";
+	     cout << "Good game.";
 	     return 0;
 	}
     }
@@ -50,8 +56,8 @@ Board createBoard()
 }
 
 void playGame(Board& board){
-    std::cout << "Noughts and Crosses\n";
-    std::cout << "You are X. The computer is O.\n";
+    cout << "Noughts and Crosses\n";
+    cout << "You are X. The computer is O.\n";
 
     while (!isGameOver(board)) {
         printBoard(board);
@@ -63,18 +69,18 @@ void playGame(Board& board){
 
         const int computerMove = chooseComputerMove(board);
         makeMove(board, computerMove, ComputerMarker);
-        std::cout << "Computer chose square " << computerMove << ".\n";
+        cout << "Computer chose square " << computerMove << ".\n";
     }
 
     printBoard(board);
 
     const char result = winner(board);
     if (result == HumanMarker) {
-        std::cout << "You win!\n";
+        cout << "You win!\n";
     } else if (result == ComputerMarker) {
-        std::cout << "Computer wins!\n";
+        cout << "Computer wins!\n";
     } else {
-        std::cout << "It's a draw!\n";
+        cout << "It's a draw!\n";
     }
 }
 
@@ -171,18 +177,18 @@ char displayCell(const Board& board, int index)
 
 void printBoard(const Board& board)
 {
-    std::cout << "\n";
+    cout << "\n";
     for (int row = 0; row < 3; ++row) {
         const int start = row * 3;
-        std::cout << " " << displayCell(board, start)
-                  << " | " << displayCell(board, start + 1)
-                  << " | " << displayCell(board, start + 2) << "\n";
+        cout << " " << displayCell(board, start)
+             << " | " << displayCell(board, start + 1)
+             << " | " << displayCell(board, start + 2) << "\n";
 
         if (row < 2) {
-            std::cout << "---+---+---\n";
+            cout << "---+---+---\n";
         }
     }
-    std::cout << "\n";
+    cout << "\n";
 }
 
 int readHumanMove(const Board& board)
@@ -190,13 +196,13 @@ int readHumanMove(const Board& board)
     int position = 0;
 
     while (true) {
-        std::cout << "Choose a square (1-9): ";
-        if (std::cin >> position && isMoveValid(board, position)) {
+        cout << "Choose a square (1-9): ";
+        if (cin >> position && isMoveValid(board, position)) {
             return position;
         }
 
-        std::cout << "That move is not available. Try again.\n";
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        cout << "That move is not available. Try again.\n";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 }
