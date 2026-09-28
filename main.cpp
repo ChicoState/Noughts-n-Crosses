@@ -45,7 +45,13 @@ int main()
 
         const int computerMove = chooseComputerMove(board);
         makeMove(board, computerMove, ComputerMarker);
-        cout << "Computer chose square " << computerMove << ".\n";
+        std::cout << "Computer chose square " << computerMove << ".\n";
+        char ans;
+        std::cout << "End game? Y/N";
+        std::cin >> ans;
+        if (ans != "y" && ans != "Y"){
+            isGameOver = true;
+        }
     }
 
     printBoard(board);
