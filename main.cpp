@@ -53,6 +53,15 @@ int main()
         std::cout << "It's a draw!\n";
     }
 
+    char restart = 'y';
+        //check if player wants to restart match
+        std::cout << "Play Again? Press y to play again, and any other button to stop\n" << std::endl;
+        //unsure why '>>' is not allowed here for 
+        if(std::cin >> restart){
+            std::cout << "new game started\n" << std::endl;
+        }
+
+
     return 0;
 }
 #endif
@@ -186,3 +195,5 @@ int readHumanMove(const Board& board)
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
 }
+
+
