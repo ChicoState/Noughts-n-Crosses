@@ -30,34 +30,51 @@ int readHumanMove(const Board& board);
 #ifndef NOUGHTS_AND_CROSSES_TEST
 int main()
 {
-    Board board = createBoard();
+    int new_game = 1;
 
-    cout << "Noughts and Crosses\n";
-    cout << "You are X. The computer is O.\n";
+    do {
+        Board board = createBoard();
 
-    while (!isGameOver(board)) {
-        printBoard(board);
-        makeMove(board, readHumanMove(board), HumanMarker);
+        cout << "Noughts and Crosses\n";
+        cout << "You are X. The computer is O.\n";
 
-        if (isGameOver(board)) {
-            break;
-        }
+        while (!isGameOver(board)) {
+            printBoard(board);
+            makeMove(board, readHumanMove(board), HumanMarker);
 
-        const int computerMove = chooseComputerMove(board);
-        makeMove(board, computerMove, ComputerMarker);
-        cout << "Computer chose square " << computerMove << ".\n";
-    }
+            if (isGameOver(board)) {
+                break;
+            }
 
-    printBoard(board);
+            const int computerMove = chooseComputerMove(board);
+            makeMove(board, computerMove, ComputerMarker);
+            cout << "Computer chose square " << computerMove << ".\n";
+          }
 
-    const char result = winner(board);
-    if (result == HumanMarker) {
-        cout << "You win!\n";
-    } else if (result == ComputerMarker) {
-        cout << "Computer wins!\n";
-    } else {
-        cout << "It's a draw!\n";
-    }
+         printBoard(board);
+
+         const char result = winner(board);
+         if (result == HumanMarker) {
+           cout << "You win!\n";
+         } else if (result == ComputerMarker) {
+           cout << "Computer wins!\n";
+         } else {
+           cout << "It's a draw!\n";
+         }
+
+        cout << "Play again (y/n)?\n";
+
+	char answer;
+
+        cin >> answer;
+
+	if (answer != 'y' && answer != 'Y') {
+	     new_game = 0;
+	}
+
+    } while (new_game);
+
+    cout << "Good game.\n";
 
     return 0;
 }
