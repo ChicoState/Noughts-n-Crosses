@@ -20,12 +20,36 @@ int chooseComputerMove(const Board& board);
 char displayCell(const Board& board, int index);
 void printBoard(const Board& board);
 int readHumanMove(const Board& board);
-
+void playGame(Board& board);
 #ifndef NOUGHTS_AND_CROSSES_TEST
 int main()
 {
     Board board = createBoard();
+    
+    while (1==1){
+	Board board = createBoard();
+	playGame(board);
+	std::cout << "Play again (y/n)?";
+	char userIn;
+	std::cin >> userIn;
+	if(userIn != 'y' && userIn != 'Y'){
+	    std::cout << "Good game.";
+	     return 0;
+	}
+    }
 
+    return 0;
+}
+#endif
+
+Board createBoard()
+{
+    return {EmptyCell, EmptyCell, EmptyCell,
+            EmptyCell, EmptyCell, EmptyCell,
+            EmptyCell, EmptyCell, EmptyCell};
+}
+
+void playGame(Board& board){
     std::cout << "Noughts and Crosses\n";
     std::cout << "You are X. The computer is O.\n";
 
@@ -52,16 +76,6 @@ int main()
     } else {
         std::cout << "It's a draw!\n";
     }
-
-    return 0;
-}
-#endif
-
-Board createBoard()
-{
-    return {EmptyCell, EmptyCell, EmptyCell,
-            EmptyCell, EmptyCell, EmptyCell,
-            EmptyCell, EmptyCell, EmptyCell};
 }
 
 bool isMoveValid(const Board& board, int position)
