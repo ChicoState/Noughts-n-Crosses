@@ -199,14 +199,14 @@ bool playAgain(){
   char response;
 
   while (true) {
-      std::cout << "Play again (y/n)? ";
-      std::cin >> response;
+      cout << "Play again (y/n)? ";
+      cin >> response;
       switch (response) {
           case 'y':
-              std::cout << std::endl;
+              cout << std::endl;
               return true;
           default:
-              std::cout << "Good game\n";
+              cout << "Good game\n";
               return false;
       }
   }
