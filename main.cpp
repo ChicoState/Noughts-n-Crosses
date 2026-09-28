@@ -2,6 +2,7 @@
 #include <cctype>
 #include <iostream>
 #include <limits>
+#include <string>
 
 const char EmptyCell = ' ';
 const char HumanMarker = 'X';
@@ -22,11 +23,11 @@ void printBoard(const Board& board);
 int readHumanMove(const Board& board);
 
 #ifndef NOUGHTS_AND_CROSSES_TEST
-int main()
+
+void gameLoop()
 {
     Board board = createBoard();
 
-    std::cout << "Noughts and Crosses\n";
     std::cout << "You are X. The computer is O.\n";
 
     while (!isGameOver(board)) {
@@ -52,6 +53,27 @@ int main()
     } else {
         std::cout << "It's a draw!\n";
     }
+}
+
+int main()
+{
+    std::cout << "Noughts and Crosses\n";
+    gameLoop();
+
+    while (true)
+    {
+        std::string resp;
+        std::cout << "Play again? (y/n): ";
+        std::cin >> resp;
+
+        if (resp == "Y" || resp == "y") {
+            gameLoop();
+        } else {
+            break;
+        }
+    }
+
+    std::cout << "Good game.\n";
 
     return 0;
 }
