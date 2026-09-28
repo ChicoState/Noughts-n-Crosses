@@ -69,5 +69,11 @@ public:
  void runTest() { suite_NoughtsCrossesTest.testComputerPrefersCenterThenFirstAvailableSquare(); }
 } testDescription_suite_NoughtsCrossesTest_testComputerPrefersCenterThenFirstAvailableSquare;
 
+static class TestDescription_suite_NoughtsCrossesTest_testRecognizesYesAnswersToPlayAgain : public CxxTest::RealTestDescription {
+public:
+ TestDescription_suite_NoughtsCrossesTest_testRecognizesYesAnswersToPlayAgain() : CxxTest::RealTestDescription( Tests_NoughtsCrossesTest, suiteDescription_NoughtsCrossesTest, 88, "testRecognizesYesAnswersToPlayAgain" ) {}
+ void runTest() { suite_NoughtsCrossesTest.testRecognizesYesAnswersToPlayAgain(); }
+} testDescription_suite_NoughtsCrossesTest_testRecognizesYesAnswersToPlayAgain;
+
 #include <cxxtest/Root.cpp>
 const char* CxxTest::RealWorldDescription::_worldName = "cxxtest";

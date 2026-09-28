@@ -2,12 +2,14 @@
 #include <cctype>
 #include <iostream>
 #include <limits>
+#include <string>
 
 using std::array;
 using std::cin;
 using std::cout;
 using std::numeric_limits;
 using std::streamsize;
+using std::string;
 
 const char EmptyCell = ' ';
 const char HumanMarker = 'X';
@@ -26,39 +28,21 @@ int chooseComputerMove(const Board& board);
 char displayCell(const Board& board, int index);
 void printBoard(const Board& board);
 int readHumanMove(const Board& board);
+void playGame();
+bool isYesAnswer(const string& answer);
+bool askToPlayAgain();
 
 #ifndef NOUGHTS_AND_CROSSES_TEST
 int main()
 {
-    Board board = createBoard();
-
     cout << "Noughts and Crosses\n";
     cout << "You are X. The computer is O.\n";
 
-    while (!isGameOver(board)) {
-        printBoard(board);
-        makeMove(board, readHumanMove(board), HumanMarker);
+    do {
+        playGame();
+    } while (askToPlayAgain());
 
-        if (isGameOver(board)) {
-            break;
-        }
-
-        const int computerMove = chooseComputerMove(board);
-        makeMove(board, computerMove, ComputerMarker);
-        cout << "Computer chose square " << computerMove << ".\n";
-    }
-
-    printBoard(board);
-
-    const char result = winner(board);
-    if (result == HumanMarker) {
-        cout << "You win!\n";
-    } else if (result == ComputerMarker) {
-        cout << "Computer wins!\n";
-    } else {
-        cout << "It's a draw!\n";
-    }
-
+    cout << "Thanks for playing!\n";
     return 0;
 }
 #endif
@@ -191,4 +175,48 @@ int readHumanMove(const Board& board)
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
+}
+
+void playGame()
+{
+    Board board = createBoard();
+
+    while (!isGameOver(board)) {
+        printBoard(board);
+        makeMove(board, readHumanMove(board), HumanMarker);
+
+        if (isGameOver(board)) {
+            break;
+        }
+
+        const int computerMove = chooseComputerMove(board);
+        makeMove(board, computerMove, ComputerMarker);
+        cout << "Computer chose square " << computerMove << ".\n";
+    }
+
+    printBoard(board);
+
+    const char result = winner(board);
+    if (result == HumanMarker) {
+        cout << "You win!\n";
+    } else if (result == ComputerMarker) {
+        cout << "Computer wins!\n";
+    } else {
+        cout << "It's a draw!\n";
+    }
+}
+
+bool isYesAnswer(const string& answer)
+{
+    return !answer.empty() && std::tolower(static_cast<unsigned char>(answer[0])) == 'y';
+}
+
+bool askToPlayAgain()
+{
+    string answer;
+    cout << "Play again? (y/n): ";
+    if (!(cin >> answer)) {
+        return false;
+    }
+    return isYesAnswer(answer);
 }
