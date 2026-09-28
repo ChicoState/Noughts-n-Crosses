@@ -34,7 +34,13 @@ int main()
         makeMove(board, readHumanMove(board), HumanMarker);
 
         if (isGameOver(board)) {
-            break;
+	    string check;
+            cout << "Do you want to play again? Y for yes.\n";
+	    cin >> check;
+	    if (check != "Y")
+	    {
+	    	break;	
+	    }
         }
 
         const int computerMove = chooseComputerMove(board);
