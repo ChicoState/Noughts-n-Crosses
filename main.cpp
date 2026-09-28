@@ -26,6 +26,8 @@ int readHumanMove(const Board& board);
 
 void gameLoop()
 {
+    Board board = createBoard();
+
     std::cout << "You are X. The computer is O.\n";
 
     while (!isGameOver(board)) {
@@ -55,8 +57,6 @@ void gameLoop()
 
 int main()
 {
-    Board board = createBoard();
-
     std::cout << "Noughts and Crosses\n";
     gameLoop();
 
@@ -72,6 +72,8 @@ int main()
             break;
         }
     }
+
+    std::cout << "Good game.\n";
 
     return 0;
 }
