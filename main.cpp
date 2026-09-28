@@ -27,6 +27,7 @@ int main()
     Board board = createBoard();
 
     std::cout << "Noughts and Crosses\n";
+    start: 
     std::cout << "You are X. The computer is O.\n";
 
     while (!isGameOver(board)) {
@@ -51,6 +52,14 @@ int main()
         std::cout << "Computer wins!\n";
     } else {
         std::cout << "It's a draw!\n";
+    }
+    std::cout << "Play again? (y/n): ";
+    char playAgain;
+    std::cin >> playAgain;
+    if (std::tolower(playAgain) == 'y') {
+        goto start;
+    } else {
+        std::cout << "Good game.\n";
     }
 
     return 0;
