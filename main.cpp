@@ -30,17 +30,11 @@ int readHumanMove(const Board& board);
 #ifndef NOUGHTS_AND_CROSSES_TEST
 int main()
 {
-<<<<<<< HEAD
     char play_again = 'y';
     std::cout << "Noughts and Crosses\n";
     while (play_again == 'y' || play_again == 'Y' ){
         Board board = createBoard();
-=======
-    Board board = createBoard();
 
-    cout << "Noughts and Crosses\n";
-    cout << "You are X. The computer is O.\n";
->>>>>>> 7aa5fc8e610d6d4e596a0548441db1109d17c881
 
         std::cout << "You are X. The computer is O.\n";
 
@@ -57,7 +51,6 @@ int main()
             std::cout << "Computer chose square " << computerMove << ".\n";
         }
 
-<<<<<<< HEAD
         printBoard(board);
 
         const char result = winner(board);
@@ -73,24 +66,7 @@ int main()
         std::cin >> play_again;
     }
     std::cout << "Good game.";
-=======
-        const int computerMove = chooseComputerMove(board);
-        makeMove(board, computerMove, ComputerMarker);
-        cout << "Computer chose square " << computerMove << ".\n";
-    }
 
-    printBoard(board);
-
-    const char result = winner(board);
-    if (result == HumanMarker) {
-        cout << "You win!\n";
-    } else if (result == ComputerMarker) {
-        cout << "Computer wins!\n";
-    } else {
-        cout << "It's a draw!\n";
-    }
-
->>>>>>> 7aa5fc8e610d6d4e596a0548441db1109d17c881
     return 0;
 
 }
