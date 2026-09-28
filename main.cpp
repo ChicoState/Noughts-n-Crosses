@@ -35,8 +35,8 @@ int main()
     do {
         Board board = createBoard();
 
-        std::cout << "Noughts and Crosses\n";
-        std::cout << "You are X. The computer is O.\n";
+        cout << "Noughts and Crosses\n";
+        cout << "You are X. The computer is O.\n";
 
         while (!isGameOver(board)) {
             printBoard(board);
@@ -48,33 +48,33 @@ int main()
 
             const int computerMove = chooseComputerMove(board);
             makeMove(board, computerMove, ComputerMarker);
-            std::cout << "Computer chose square " << computerMove << ".\n";
+            cout << "Computer chose square " << computerMove << ".\n";
           }
 
          printBoard(board);
 
          const char result = winner(board);
          if (result == HumanMarker) {
-           std::cout << "You win!\n";
+           cout << "You win!\n";
          } else if (result == ComputerMarker) {
-           std::cout << "Computer wins!\n";
+           cout << "Computer wins!\n";
          } else {
-           std::cout << "It's a draw!\n";
+           cout << "It's a draw!\n";
          }
 
-        std::cout << "Play again (y/n)?\n";
+        cout << "Play again (y/n)?\n";
 
-	      char answer;
+	char answer;
 
-        std::cin >> answer;
+        cin >> answer;
 
-	      if (answer != 'y' && answer != 'Y') {
-	        new_game = 0;
-	      }
+	if (answer != 'y' && answer != 'Y') {
+	     new_game = 0;
+	}
 
     } while (new_game);
 
-    std::cout << "Good game.\n";
+    cout << "Good game.\n";
 
     return 0;
 }
