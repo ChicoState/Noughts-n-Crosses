@@ -59,6 +59,16 @@ int main()
         cout << "It's a draw!\n";
     }
 
+    std::cout << "==========================\n";
+    std::cout << "Play again? (y/n): ";
+
+    //Read user input to determine if they want to play again
+    char playAgain; 
+    std::cin >> playAgain;
+    if (playAgain == 'y' || playAgain == 'Y') { //If User wants to play again
+        return main();
+    }
+    std::cout << "Good Game.\n"; //If User does not want to play again
     return 0;
 }
 #endif
