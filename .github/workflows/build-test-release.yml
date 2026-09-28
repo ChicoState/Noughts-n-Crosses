@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - refactor/std-using-declarations
   pull_request:
     branches:
       - main

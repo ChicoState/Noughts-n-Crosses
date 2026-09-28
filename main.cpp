@@ -3,11 +3,7 @@
 #include <iostream>
 #include <limits>
 
-using std::array;
-using std::cin;
-using std::cout;
-using std::numeric_limits;
-using std::streamsize;
+using namespace std;
 
 const char EmptyCell = ' ';
 const char HumanMarker = 'X';
@@ -30,35 +26,44 @@ int readHumanMove(const Board& board);
 #ifndef NOUGHTS_AND_CROSSES_TEST
 int main()
 {
-    Board board = createBoard();
+    while(1){
+        Board board = createBoard();
+        cout << "Noughts and Crosses\n";
+        cout << "You are X. The computer is O.\n";
 
-    cout << "Noughts and Crosses\n";
-    cout << "You are X. The computer is O.\n";
+        while (!isGameOver(board)) {
+            printBoard(board);
+            makeMove(board, readHumanMove(board), HumanMarker);
 
-    while (!isGameOver(board)) {
-        printBoard(board);
-        makeMove(board, readHumanMove(board), HumanMarker);
-
-        if (isGameOver(board)) {
-            break;
+            if (isGameOver(board)) {
+                break;
+            }
+          
+            const int computerMove = chooseComputerMove(board);
+            makeMove(board, computerMove, ComputerMarker);
+            cout << "Computer chose square " << computerMove << ".\n";
         }
 
-        const int computerMove = chooseComputerMove(board);
-        makeMove(board, computerMove, ComputerMarker);
-        cout << "Computer chose square " << computerMove << ".\n";
+        printBoard(board);
+
+        const char result = winner(board);
+        if (result == HumanMarker) {
+            cout << "You win!\n";
+        } else if (result == ComputerMarker) {
+            cout << "Computer wins!\n";
+        } else {
+            cout << "It's a draw!\n";
+        }
+        cout << "Play again (y/n)?" << endl;
+        string response = "";
+        cin >> response;
+        if(response == "Y" || response == "y"){
+            continue;
+        }else{
+            break;
+        }
     }
-
-    printBoard(board);
-
-    const char result = winner(board);
-    if (result == HumanMarker) {
-        cout << "You win!\n";
-    } else if (result == ComputerMarker) {
-        cout << "Computer wins!\n";
-    } else {
-        cout << "It's a draw!\n";
-    }
-
+    cout << "Good game." << endl;
     return 0;
 }
 #endif
