@@ -26,37 +26,48 @@ int chooseComputerMove(const Board& board);
 char displayCell(const Board& board, int index);
 void printBoard(const Board& board);
 int readHumanMove(const Board& board);
+bool readContinueInput();
 
 #ifndef NOUGHTS_AND_CROSSES_TEST
 int main()
 {
-    Board board = createBoard();
+    std::cout << "Noughts and Crosses\n";
+    
+    bool continuePlaying = true;
+    while(continuePlaying){
+        std::cout << "You are X. The computer is O.\n";
+        
+        Board board = createBoard();
 
-    cout << "Noughts and Crosses\n";
-    cout << "You are X. The computer is O.\n";
+        while (!isGameOver(board)) {
+            printBoard(board);
+            makeMove(board, readHumanMove(board), HumanMarker);
 
-    while (!isGameOver(board)) {
-        printBoard(board);
-        makeMove(board, readHumanMove(board), HumanMarker);
+            if (isGameOver(board)) {
+                break;
+            }
 
-        if (isGameOver(board)) {
-            break;
+            const int computerMove = chooseComputerMove(board);
+            makeMove(board, computerMove, ComputerMarker);
+            std::cout << "Computer chose square " << computerMove << ".\n";
         }
 
-        const int computerMove = chooseComputerMove(board);
-        makeMove(board, computerMove, ComputerMarker);
-        cout << "Computer chose square " << computerMove << ".\n";
-    }
+        printBoard(board);
 
-    printBoard(board);
+        const char result = winner(board);
+        if (result == HumanMarker) {
+            std::cout << "You win!\n";
+        } else if (result == ComputerMarker) {
+            std::cout << "Computer wins!\n";
+        } else {
+            std::cout << "It's a draw!\n";
+        }
 
-    const char result = winner(board);
-    if (result == HumanMarker) {
-        cout << "You win!\n";
-    } else if (result == ComputerMarker) {
-        cout << "Computer wins!\n";
-    } else {
-        cout << "It's a draw!\n";
+        // If player wants to stop playing, exit continue game loop.
+        if (!readContinueInput()){
+            std::cout << "Good game.\n";
+            continuePlaying = false;
+        }
     }
 
     return 0;
@@ -191,4 +202,13 @@ int readHumanMove(const Board& board)
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
+}
+
+bool readContinueInput()
+{
+    std::cout << "Play again (y/n)?: ";
+
+    char c;
+
+    return std::cin >> c && (c == 'y' || c == 'Y');
 }
