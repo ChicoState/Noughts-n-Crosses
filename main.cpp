@@ -30,35 +30,50 @@ int readHumanMove(const Board& board);
 #ifndef NOUGHTS_AND_CROSSES_TEST
 int main()
 {
-    Board board = createBoard();
+    bool isGame = true;
 
-    cout << "Noughts and Crosses\n";
-    cout << "You are X. The computer is O.\n";
+    while (isGame) {
+        Board board = createBoard();
 
-    while (!isGameOver(board)) {
-        printBoard(board);
-        makeMove(board, readHumanMove(board), HumanMarker);
+        cout << "Noughts and Crosses\n";
+        cout << "You are X. The computer is O.\n";
 
-        if (isGameOver(board)) {
-            break;
+        while (!isGameOver(board)) {
+            printBoard(board);
+            makeMove(board, readHumanMove(board), HumanMarker);
+
+            if (isGameOver(board)) {
+                break;
+            }
+
+            const int computerMove = chooseComputerMove(board);
+            makeMove(board, computerMove, ComputerMarker);
+            cout << "Computer chose square " << computerMove << ".\n";
         }
 
-        const int computerMove = chooseComputerMove(board);
-        makeMove(board, computerMove, ComputerMarker);
-        cout << "Computer chose square " << computerMove << ".\n";
+        printBoard(board);
+
+        const char result = winner(board);
+        if (result == HumanMarker) {
+            cout << "You win!\n";
+        } else if (result == ComputerMarker) {
+            cout << "Computer wins!\n";
+        } else {
+            cout << "It's a draw!\n";
+        }
+
+        char gameAgain;
+        cout << "Play again (y/n)?\n";
+        cin >> gameAgain;
+
+        const char uppercase = std::toupper(gameAgain);
+
+        if (uppercase != 'Y') {
+            isGame = false;
+        }
     }
 
-    printBoard(board);
-
-    const char result = winner(board);
-    if (result == HumanMarker) {
-        cout << "You win!\n";
-    } else if (result == ComputerMarker) {
-        cout << "Computer wins!\n";
-    } else {
-        cout << "It's a draw!\n";
-    }
-
+    cout << "Good game.\n";
     return 0;
 }
 #endif
