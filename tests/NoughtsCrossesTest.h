@@ -84,4 +84,14 @@ public:
 
         TS_ASSERT_EQUALS(chooseComputerMove(board), 7);
     }
+
+    void testRecognizesYesAnswersToPlayAgain()
+    {
+        TS_ASSERT(isYesAnswer("y"));
+        TS_ASSERT(isYesAnswer("Y"));
+        TS_ASSERT(isYesAnswer("yes"));
+        TS_ASSERT(!isYesAnswer("n"));
+        TS_ASSERT(!isYesAnswer("no"));
+        TS_ASSERT(!isYesAnswer(""));
+    }
 };
