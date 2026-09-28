@@ -47,13 +47,21 @@ int main()
     const char result = winner(board);
     if (result == HumanMarker) {
         std::cout << "You win!\n";
+	std::cout << "Play again (y/n)?\n";
     } else if (result == ComputerMarker) {
         std::cout << "Computer wins!\n";
+        std::cout << "Play again (y/n)?\n";	
     } else {
         std::cout << "It's a draw!\n";
+	std::cout << "Play again (y/n)?\n";
     }
 
-    return 0;
+    if (std::cin == "y" || "Y")
+	createBoard();
+    else {
+	std::cout << "Good game.\n";
+	return 0;
+    }
 }
 #endif
 
