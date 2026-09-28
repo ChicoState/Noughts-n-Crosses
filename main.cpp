@@ -59,6 +59,17 @@ int main()
         cout << "It's a draw!\n";
     }
 
+
+    char playAgain;
+    std::cout << "Play again (y/n)\n";
+    std::cin >> playAgain;
+
+    if (tolower(playAgain) == 'y') {
+        main();
+    } else {
+        std::cout << "Good game.\n";
+    }
+    
     return 0;
 }
 #endif
