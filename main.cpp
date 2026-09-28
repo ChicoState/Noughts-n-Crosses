@@ -28,7 +28,6 @@ int main()
 {
     while(1){
         Board board = createBoard();
-
         cout << "Noughts and Crosses\n";
         cout << "You are X. The computer is O.\n";
 
@@ -39,7 +38,7 @@ int main()
             if (isGameOver(board)) {
                 break;
             }
-
+          
             const int computerMove = chooseComputerMove(board);
             makeMove(board, computerMove, ComputerMarker);
             cout << "Computer chose square " << computerMove << ".\n";
@@ -173,8 +172,8 @@ void printBoard(const Board& board)
     for (int row = 0; row < 3; ++row) {
         const int start = row * 3;
         cout << " " << displayCell(board, start)
-                  << " | " << displayCell(board, start + 1)
-                  << " | " << displayCell(board, start + 2) << "\n";
+             << " | " << displayCell(board, start + 1)
+             << " | " << displayCell(board, start + 2) << "\n";
 
         if (row < 2) {
             cout << "---+---+---\n";
