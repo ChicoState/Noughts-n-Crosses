@@ -35,13 +35,18 @@ int main()
     cout << "Noughts and Crosses\n";
     cout << "You are X. The computer is O.\n";
 
-    while (!isGameOver(board)) {
         printBoard(board);
-        makeMove(board, readHumanMove(board), HumanMarker);
 
-        if (isGameOver(board)) {
-            break;
+        const char result = winner(board);
+        if (result == HumanMarker) {
+            std::cout << "You win!\n";
+        } else if (result == ComputerMarker) {
+            std::cout << "Computer wins!\n";
+        } else {
+            std::cout << "It's a draw!\n";
         }
+        std::cout << "Play again? (y/n): ";
+        std::cin >> response;
 
         const int computerMove = chooseComputerMove(board);
         makeMove(board, computerMove, ComputerMarker);
