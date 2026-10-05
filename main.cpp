@@ -24,33 +24,45 @@ int readHumanMove(const Board& board);
 #ifndef NOUGHTS_AND_CROSSES_TEST
 int main()
 {
-    Board board = createBoard();
+    bool continuegame = true;
+    while (continuegame) {
+        Board board = createBoard();
 
-    std::cout << "Noughts and Crosses\n";
-    std::cout << "You are X. The computer is O.\n";
+        std::cout << "Noughts and Crosses\n";
+        std::cout << "You are X. The computer is O.\n";
 
-    while (!isGameOver(board)) {
-        printBoard(board);
-        makeMove(board, readHumanMove(board), HumanMarker);
+        while (!isGameOver(board)) {
+            printBoard(board);
+            makeMove(board, readHumanMove(board), HumanMarker);
 
-        if (isGameOver(board)) {
-            break;
+            if (isGameOver(board)) {
+                break;
+            }
+
+            const int computerMove = chooseComputerMove(board);
+            makeMove(board, computerMove, ComputerMarker);
+            std::cout << "Computer chose square " << computerMove << ".\n";
         }
 
-        const int computerMove = chooseComputerMove(board);
-        makeMove(board, computerMove, ComputerMarker);
-        std::cout << "Computer chose square " << computerMove << ".\n";
-    }
+        printBoard(board);
 
-    printBoard(board);
+        const char result = winner(board);
+        if (result == HumanMarker) {
+            std::cout << "You win!\n";
+        } else if (result == ComputerMarker) {
+            std::cout << "Computer wins!\n";
+        } else {
+            std::cout << "It's a draw!\n";
+        }
 
-    const char result = winner(board);
-    if (result == HumanMarker) {
-        std::cout << "You win!\n";
-    } else if (result == ComputerMarker) {
-        std::cout << "Computer wins!\n";
-    } else {
-        std::cout << "It's a draw!\n";
+        char choice;
+        cout << "Play again? (y/n)\n";
+        cin >> choice;
+        if (choice == "y") {
+            continue;
+        } else {
+            continuegame = false;
+        }
     }
 
     return 0;
